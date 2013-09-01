@@ -1,3 +1,13 @@
+//************************************************************************************************************************************
+//		CPrawn is made and created by JJ Lowe. The concept is based off of an Atari game, Surround which was a port of Blockade. (1976-1977)
+//
+//		The idea was to make a functional Atari-esque/Ascii game with all the restrictions of C++.
+//
+//		This was basically just made to stretch my knowledge of C++ and to pass time. 
+//
+//		Any code used in this program can be used for educational purposes or for personal programs.
+//************************************************************************************************************************************
+
 #include <conio.h>
 #include <iostream>
 #include <string>
@@ -12,7 +22,11 @@ HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 COORD CursorPosition;
 void gotoXY(int x, int y)	// For the record this isn't the same as goto in code
 							// This refers to moving the cursor on the screen so that everything gets printed in the correct place
-{							// This is how you can do games in C++ without having to reprint the screen every time
+							// This is how you can do games in C++ without having to reprint the screen every time
+							// It becomes more complicated as essentially two layers are presented, one being the vector of vectors below
+							// The second being where the cursor is on top, you compare the two to get hit detection
+							
+{
 	CursorPosition.X = x; // Locates column
 	CursorPosition.Y = y; // Locates Row
 	SetConsoleCursorPosition(console,CursorPosition); // Sets position for next thing to be printed 
@@ -110,7 +124,7 @@ int main(int argc, char* argv[])
 		system("cls");
 		cout << "================================================================================";
 		cout << "======                                                                    ======";
-		cout << "==                                  Tron                                      ==";
+		cout << "==                                  CPrawn                                    ==";
 		cout << "======                                                                    ======";
 		cout << "================================================================================";
 		cout << "\n";
@@ -243,14 +257,7 @@ int main(int argc, char* argv[])
 				int tempinput = input;
 				
 					if (_kbhit()) // This is affected through the conio.h file, kbhit detects a keyboard press
-					{		
 						input = _getch(); // This then reads the buffer to see if anything was entered and extracts it
-						gotoXY(40, 21);
-						cout << input;
-					}
-
-				gotoXY(30, 21);
-					cout << input;
 
 				// 75 is left, 72 is up, 80 is down, and 77 is right on the keyboard
 				if (input != 72 && input != 75 && input != 77 && input != 80 && input != 59)
